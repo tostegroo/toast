@@ -13,7 +13,7 @@ A beautiful responsive documentation template theme for JSDoc 3
 ## Install
 
 ```bash
-$ npm install --save-dev toast
+$ npm install --save-dev toast-jsdoc
 ```
 
 ## Usage
@@ -21,7 +21,7 @@ $ npm install --save-dev toast
 Clone repository to your designated `jsdoc` template directory, then:
 
 ```bash
-$ jsdoc entry-file.js -t path/to/toast
+$ jsdoc entry-file.js -t path/to/toast-jsdoc
 ```
 
 ### Node.js Dependency
@@ -38,7 +38,7 @@ In your `.jsdoc.json` file, add a template option.
 
 ```json
 "opts": {
-  "template": "node_modules/toast"
+  "template": "node_modules/toast-jsdoc"
 }
 ```
 
@@ -67,7 +67,7 @@ In your `.jsdoc.json` file, add a template option.
         "encoding": "utf8",
         "private": true,
         "recurse": true,
-        "template": "./node_modules/toast"
+        "template": "./node_modules/toast-jsdoc"
     }
 }
 ```
