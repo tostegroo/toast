@@ -292,16 +292,24 @@ function buildMemberNav(items, itemHeading, itemsSeen, linktoFn) {
 
     if (items.length) {
         var itemsNav = '';
+        var hasSubsectionOption = env.conf.templates && env.conf.templates.default && env.conf.templates.default.nav.subsection;
+        var navSubsectionTypedef = hasSubsectionOption && env.conf.templates.default.nav.subsection.typedef;
+        var navSubsectionClass = hasSubsectionOption && env.conf.templates.default.nav.subsection.class;
 
         items.forEach(function(item) {
             var methods = find({kind:'function', memberof: item.longname});
             var members = find({kind:'member', memberof: item.longname});
+            var typedef = find({kind:'typedef', memberof: item.longname});
+            var classMember = find({kind:'class', memberof: item.longname});
 
-            if ( !hasOwnProp.call(item, 'longname') ) {
+            if( navSubsectionClass && item.kind === 'class' && item.memberof) {
+                return;
+            } else if ( !hasOwnProp.call(item, 'longname') ) {
                 itemsNav += '<li>' + linktoFn('', item.name);
                 itemsNav += '</li>';
             } else if ( !hasOwnProp.call(itemsSeen, item.longname) ) {
                 itemsNav += '<li>' + linktoFn(item.longname, item.name.replace(/^module:/, ''));
+
                 if (methods.length) {
                     itemsNav += "<ul class='methods'>";
 
@@ -319,6 +327,30 @@ function buildMemberNav(items, itemHeading, itemsSeen, linktoFn) {
                     members.forEach(function (member) {
                         itemsNav += "<li data-type='method'>";
                         itemsNav += linkto(member.longname, member.name);
+                        itemsNav += "</li>";
+                    });
+
+                    itemsNav += "</ul>";
+                }
+
+                if (navSubsectionClass && classMember.length) {
+                    itemsNav += "<ul class='classes'>";
+
+                    classMember.forEach(function (classMember) {
+                        itemsNav += "<li data-type='method'>";
+                        itemsNav += linkto(classMember.longname, classMember.name);
+                        itemsNav += "</li>";
+                    });
+
+                    itemsNav += "</ul>";
+                }
+
+                if (navSubsectionTypedef && typedef.length) {
+                    itemsNav += "<ul class='typedefs'>";
+
+                    typedef.forEach(function (typedef) {
+                        itemsNav += "<li data-type='method'>";
+                        itemsNav += linkto(typedef.longname, typedef.name);
                         itemsNav += "</li>";
                     });
 
