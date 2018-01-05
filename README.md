@@ -60,7 +60,15 @@ In your `.jsdoc.json` file, add a template option.
     ],
     "templates": {
         "cleverLinks": false,
-        "monospaceLinks": true
+        "monospaceLinks": true,
+        "default": {
+            "nav": {
+                "subsection": {
+                    "typedef": false, // Default false, will display memberof typedef in nav section
+                    "class": false // Default false, will display memberof class in nav section (usefull to group external namespaces)
+                }
+            }
+        }
     },
     "opts": {
         "destination": "./docs/",
