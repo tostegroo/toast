@@ -565,6 +565,7 @@ footer {
 
 .params .params thead tr, .props .props thead tr {
    background-color: #fff;
+   color: #677180;
    font-weight: bold;
 }
 
